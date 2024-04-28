@@ -1,14 +1,14 @@
-import { isDOM } from 'rc-util/lib/Dom/findDOMNode';
-import isVisible from 'rc-util/lib/Dom/isVisible';
-import useEvent from 'rc-util/lib/hooks/useEvent';
-import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
+import { isDOM } from 'rc-util-modern/dist/Dom/findDOMNode';
+import isVisible from 'rc-util-modern/dist/Dom/isVisible';
+import useEvent from 'rc-util-modern/dist/hooks/useEvent';
+import useLayoutEffect from 'rc-util-modern/dist/hooks/useLayoutEffect';
 import * as React from 'react';
 import type { TriggerProps } from '..';
 import type {
-  AlignPointLeftRight,
-  AlignPointTopBottom,
-  AlignType,
-  OffsetType,
+    AlignPointLeftRight,
+    AlignPointTopBottom,
+    AlignType,
+    OffsetType,
 } from '../interface';
 import { collectScroller, getVisibleArea, getWin, toNum } from '../util';
 

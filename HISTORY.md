@@ -31,7 +31,7 @@
 
 ## 1.7.0 / 2016-07-18
 
-- use getContainerRenderMixin from 'rc-util'
+- use getContainerRenderMixin from 'rc-util-modern'
 
 ## 1.6.0 / 2016-05-26
 

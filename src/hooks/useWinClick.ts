@@ -1,5 +1,5 @@
-import { getShadowRoot } from 'rc-util/lib/Dom/shadow';
-import { warning } from 'rc-util/lib/warning';
+import { getShadowRoot } from 'rc-util-modern/dist/Dom/shadow';
+import { warning } from 'rc-util-modern/dist/warning';
 import * as React from 'react';
 import { getWin } from '../util';
 

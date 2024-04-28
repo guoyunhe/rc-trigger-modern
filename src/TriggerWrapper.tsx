@@ -1,4 +1,4 @@
-import { fillRef, supportRef, useComposeRef } from 'rc-util/lib/ref';
+import { fillRef, supportRef, useComposeRef } from 'rc-util-modern/dist/ref';
 import * as React from 'react';
 import type { TriggerProps } from '.';
 

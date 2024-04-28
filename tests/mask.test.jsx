@@ -1,7 +1,6 @@
-import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
+import CSSMotion from 'rc-motion-modern';
 import Trigger from '../src';
-import CSSMotion from 'rc-motion';
 import { placementAlignMap } from './util';
 
 describe('Trigger.Mask', () => {
@@ -24,7 +23,7 @@ describe('Trigger.Mask', () => {
         maskTransitionName="bamboo"
       >
         <div className="target">click</div>
-      </Trigger>,
+      </Trigger>
     );
 
     const target = container.querySelector('.target');
@@ -32,7 +31,7 @@ describe('Trigger.Mask', () => {
 
     expect(cssMotionSpy).toHaveBeenCalledWith(
       expect.objectContaining({ motionName: 'bamboo' }),
-      null,
+      null
     );
   });
 });

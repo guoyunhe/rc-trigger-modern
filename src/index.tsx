@@ -1,13 +1,13 @@
-import Portal from '@rc-component/portal';
 import classNames from 'classnames';
-import type { CSSMotionProps } from 'rc-motion';
-import ResizeObserver from 'rc-resize-observer';
-import { isDOM } from 'rc-util/lib/Dom/findDOMNode';
-import { getShadowRoot } from 'rc-util/lib/Dom/shadow';
-import useEvent from 'rc-util/lib/hooks/useEvent';
-import useId from 'rc-util/lib/hooks/useId';
-import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
-import isMobile from 'rc-util/lib/isMobile';
+import type { CSSMotionProps } from 'rc-motion-modern';
+import Portal from 'rc-portal-modern';
+import ResizeObserver from 'rc-resize-observer-modern';
+import { isDOM } from 'rc-util-modern/dist/Dom/findDOMNode';
+import { getShadowRoot } from 'rc-util-modern/dist/Dom/shadow';
+import useEvent from 'rc-util-modern/dist/hooks/useEvent';
+import useId from 'rc-util-modern/dist/hooks/useId';
+import useLayoutEffect from 'rc-util-modern/dist/hooks/useLayoutEffect';
+import isMobile from 'rc-util-modern/dist/isMobile';
 import * as React from 'react';
 import Popup from './Popup';
 import TriggerWrapper from './TriggerWrapper';
@@ -28,12 +28,7 @@ import type {
 } from './interface';
 import { getAlignPopupClassName, getMotion } from './util';
 
-export type {
-  ActionType,
-  AlignType,
-  ArrowTypeOuter as ArrowType,
-  BuildInPlacements,
-};
+export type { ActionType, AlignType, ArrowTypeOuter as ArrowType, BuildInPlacements };
 
 export interface TriggerRef {
   nativeElement: HTMLElement;
@@ -80,9 +75,9 @@ export interface TriggerProps {
   maskClosable?: boolean;
 
   // =================== Motion ====================
-  /** Set popup motion. You can ref `rc-motion` for more info. */
+  /** Set popup motion. You can ref `rc-motion-modern` for more info. */
   popupMotion?: CSSMotionProps;
-  /** Set mask motion. You can ref `rc-motion` for more info. */
+  /** Set mask motion. You can ref `rc-motion-modern` for more info. */
   maskMotion?: CSSMotionProps;
 
   /** @deprecated Please us `popupMotion` instead. */
@@ -140,9 +135,7 @@ export interface TriggerProps {
   // mobile?: MobileConfig;
 }
 
-export function generateTrigger(
-  PortalComponent: React.ComponentType<any> = Portal,
-) {
+export function generateTrigger(PortalComponent: React.ComponentType<any> = Portal) {
   const Trigger = React.forwardRef<TriggerRef, TriggerProps>((props, ref) => {
     const {
       prefixCls = 'rc-trigger-popup',
@@ -283,30 +276,18 @@ export function generateTrigger(
         getShadowRoot(popupEle)?.host === ele ||
         ele === popupEle ||
         Object.values(subPopupElements.current).some(
-          (subPopupEle) => subPopupEle?.contains(ele) || ele === subPopupEle,
+          (subPopupEle) => subPopupEle?.contains(ele) || ele === subPopupEle
         )
       );
     });
 
     // =========================== Motion ===========================
-    const mergePopupMotion = getMotion(
-      prefixCls,
-      popupMotion,
-      popupAnimation,
-      popupTransitionName,
-    );
+    const mergePopupMotion = getMotion(prefixCls, popupMotion, popupAnimation, popupTransitionName);
 
-    const mergeMaskMotion = getMotion(
-      prefixCls,
-      maskMotion,
-      maskAnimation,
-      maskTransitionName,
-    );
+    const mergeMaskMotion = getMotion(prefixCls, maskMotion, maskAnimation, maskTransitionName);
 
     // ============================ Open ============================
-    const [internalOpen, setInternalOpen] = React.useState(
-      defaultPopupVisible || false,
-    );
+    const [internalOpen, setInternalOpen] = React.useState(defaultPopupVisible || false);
 
     // Render still use props as first priority
     const mergedOpen = popupVisible ?? internalOpen;
@@ -334,10 +315,7 @@ export function generateTrigger(
       // Enter or Pointer will both trigger open state change
       // We only need take one to avoid duplicated change event trigger
       // Use `lastTriggerRef` to record last open type
-      if (
-        (lastTriggerRef.current[lastTriggerRef.current.length - 1] ??
-          mergedOpen) !== nextOpen
-      ) {
+      if ((lastTriggerRef.current[lastTriggerRef.current.length - 1] ?? mergedOpen) !== nextOpen) {
         lastTriggerRef.current.push(nextOpen);
         onPopupVisibleChange?.(nextOpen);
       }
@@ -373,20 +351,15 @@ export function generateTrigger(
           setInMotion(true);
         }
       },
-      [mergedOpen],
+      [mergedOpen]
     );
 
-    const [motionPrepareResolve, setMotionPrepareResolve] =
-      React.useState<VoidFunction>(null);
+    const [motionPrepareResolve, setMotionPrepareResolve] = React.useState<VoidFunction>(null);
 
     // =========================== Align ============================
-    const [mousePos, setMousePos] = React.useState<[x: number, y: number]>([
-      0, 0,
-    ]);
+    const [mousePos, setMousePos] = React.useState<[x: number, y: number]>([0, 0]);
 
-    const setMousePosByEvent = (
-      event: Pick<React.MouseEvent, 'clientX' | 'clientY'>,
-    ) => {
+    const setMousePosByEvent = (event: Pick<React.MouseEvent, 'clientX' | 'clientY'>) => {
       setMousePos([event.clientX, event.clientY]);
     };
 
@@ -409,19 +382,13 @@ export function generateTrigger(
       popupPlacement,
       builtinPlacements,
       popupAlign,
-      onPopupAlign,
+      onPopupAlign
     );
 
-    const [showActions, hideActions] = useAction(
-      mobile,
-      action,
-      showAction,
-      hideAction,
-    );
+    const [showActions, hideActions] = useAction(mobile, action, showAction, hideAction);
 
     const clickToShow = showActions.has('click');
-    const clickToHide =
-      hideActions.has('click') || hideActions.has('contextMenu');
+    const clickToHide = hideActions.has('click') || hideActions.has('contextMenu');
 
     const triggerAlign = useEvent(() => {
       if (!inMotion) {
@@ -453,17 +420,11 @@ export function generateTrigger(
         builtinPlacements,
         prefixCls,
         alignInfo,
-        alignPoint,
+        alignPoint
       );
 
       return classNames(baseClassName, getPopupClassNameFromAlign?.(alignInfo));
-    }, [
-      alignInfo,
-      getPopupClassNameFromAlign,
-      builtinPlacements,
-      prefixCls,
-      alignPoint,
-    ]);
+    }, [alignInfo, getPopupClassNameFromAlign, builtinPlacements, prefixCls, alignPoint]);
 
     // ============================ Refs ============================
     React.useImperativeHandle(ref, () => ({
@@ -519,7 +480,7 @@ export function generateTrigger(
       eventName: string,
       nextOpen: boolean,
       delay?: number,
-      preEvent?: (event: Event) => void,
+      preEvent?: (event: Event) => void
     ) {
       cloneProps[eventName] = (event: any, ...args: any[]) => {
         preEvent?.(event);
@@ -532,10 +493,7 @@ export function generateTrigger(
 
     // ======================= Action: Click ========================
     if (clickToShow || clickToHide) {
-      cloneProps.onClick = (
-        event: React.MouseEvent<HTMLElement>,
-        ...args: any[]
-      ) => {
+      cloneProps.onClick = (event: React.MouseEvent<HTMLElement>, ...args: any[]) => {
         if (openRef.current && clickToHide) {
           triggerOpen(false);
         } else if (!openRef.current && clickToShow) {
@@ -557,7 +515,7 @@ export function generateTrigger(
       mask,
       maskClosable,
       inPopupOrChild,
-      triggerOpen,
+      triggerOpen
     );
 
     // ======================= Action: Hover ========================
@@ -569,28 +527,15 @@ export function generateTrigger(
 
     if (hoverToShow) {
       // Compatible with old browser which not support pointer event
-      wrapperAction<React.MouseEvent>(
-        'onMouseEnter',
-        true,
-        mouseEnterDelay,
-        (event) => {
-          setMousePosByEvent(event);
-        },
-      );
-      wrapperAction<React.PointerEvent>(
-        'onPointerEnter',
-        true,
-        mouseEnterDelay,
-        (event) => {
-          setMousePosByEvent(event);
-        },
-      );
+      wrapperAction<React.MouseEvent>('onMouseEnter', true, mouseEnterDelay, (event) => {
+        setMousePosByEvent(event);
+      });
+      wrapperAction<React.PointerEvent>('onPointerEnter', true, mouseEnterDelay, (event) => {
+        setMousePosByEvent(event);
+      });
       onPopupMouseEnter = (event) => {
         // Only trigger re-open when popup is visible
-        if (
-          (mergedOpen || inMotion) &&
-          popupEle?.contains(event.target as HTMLElement)
-        ) {
+        if ((mergedOpen || inMotion) && popupEle?.contains(event.target as HTMLElement)) {
           triggerOpen(true, mouseEnterDelay);
         }
       };
@@ -692,14 +637,8 @@ export function generateTrigger(
     // Render
     return (
       <>
-        <ResizeObserver
-          disabled={!mergedOpen}
-          ref={setTargetRef}
-          onResize={onTargetResize}
-        >
-          <TriggerWrapper getTriggerDOMNode={getTriggerDOMNode}>
-            {triggerNode}
-          </TriggerWrapper>
+        <ResizeObserver disabled={!mergedOpen} ref={setTargetRef} onResize={onTargetResize}>
+          <TriggerWrapper getTriggerDOMNode={getTriggerDOMNode}>{triggerNode}</TriggerWrapper>
         </ResizeObserver>
         <TriggerContext.Provider value={context}>
           <Popup

@@ -1,16 +1,7 @@
-import type { CSSMotionProps } from 'rc-motion';
-import type {
-  AlignType,
-  AnimationType,
-  BuildInPlacements,
-  TransitionNameType,
-} from './interface';
+import type { CSSMotionProps } from 'rc-motion-modern';
+import type { AlignType, AnimationType, BuildInPlacements, TransitionNameType } from './interface';
 
-function isPointsEq(
-  a1: string[] = [],
-  a2: string[] = [],
-  isAlignPoint: boolean,
-): boolean {
+function isPointsEq(a1: string[] = [], a2: string[] = [], isAlignPoint: boolean): boolean {
   if (isAlignPoint) {
     return a1[0] === a2[0];
   }
@@ -21,7 +12,7 @@ export function getAlignPopupClassName(
   builtinPlacements: BuildInPlacements,
   prefixCls: string,
   align: AlignType,
-  isAlignPoint: boolean,
+  isAlignPoint: boolean
 ): string {
   const { points } = align;
 
@@ -29,9 +20,7 @@ export function getAlignPopupClassName(
 
   for (let i = 0; i < placements.length; i += 1) {
     const placement = placements[i];
-    if (
-      isPointsEq(builtinPlacements[placement]?.points, points, isAlignPoint)
-    ) {
+    if (isPointsEq(builtinPlacements[placement]?.points, points, isAlignPoint)) {
       return `${prefixCls}-placement-${placement}`;
     }
   }
@@ -44,7 +33,7 @@ export function getMotion(
   prefixCls: string,
   motion: CSSMotionProps,
   animation: AnimationType,
-  transitionName: TransitionNameType,
+  transitionName: TransitionNameType
 ): CSSMotionProps {
   if (motion) {
     return motion;
@@ -81,8 +70,7 @@ export function collectScroller(ele: HTMLElement) {
   const scrollStyle = ['hidden', 'scroll', 'clip', 'auto'];
 
   while (current) {
-    const { overflowX, overflowY, overflow } =
-      getWin(current).getComputedStyle(current);
+    const { overflowX, overflowY, overflow } = getWin(current).getComputedStyle(current);
     if ([overflowX, overflowY, overflow].some((o) => scrollStyle.includes(o))) {
       scrollerList.push(current);
     }
@@ -130,10 +118,7 @@ export interface VisibleArea {
 /**
  * Get visible area of element
  */
-export function getVisibleArea(
-  initArea: VisibleArea,
-  scrollerList?: HTMLElement[],
-) {
+export function getVisibleArea(initArea: VisibleArea, scrollerList?: HTMLElement[]) {
   const visibleArea = { ...initArea };
 
   (scrollerList || []).forEach((ele) => {
@@ -164,16 +149,11 @@ export function getVisibleArea(
     const borderLeftNum = getPxValue(borderLeftWidth);
     const borderRightNum = getPxValue(borderRightWidth);
 
-    const scaleX = toNum(
-      Math.round((eleRect.width / eleOutWidth) * 1000) / 1000,
-    );
-    const scaleY = toNum(
-      Math.round((eleRect.height / eleOutHeight) * 1000) / 1000,
-    );
+    const scaleX = toNum(Math.round((eleRect.width / eleOutWidth) * 1000) / 1000);
+    const scaleY = toNum(Math.round((eleRect.height / eleOutHeight) * 1000) / 1000);
 
     // Original visible area
-    const eleScrollWidth =
-      (eleOutWidth - eleInnerWidth - borderLeftNum - borderRightNum) * scaleX;
+    const eleScrollWidth = (eleOutWidth - eleInnerWidth - borderLeftNum - borderRightNum) * scaleX;
     const eleScrollHeight =
       (eleOutHeight - eleInnerHeight - borderTopNum - borderBottomNum) * scaleY;
 

@@ -1,9 +1,9 @@
 /* eslint no-console:0 */
 
-import React from 'react';
-import type { CSSMotionProps } from 'rc-motion';
+import type { CSSMotionProps } from 'rc-motion-modern';
 import type { BuildInPlacements } from 'rc-trigger';
 import Trigger from 'rc-trigger';
+import React from 'react';
 import './case.less';
 
 const builtinPlacements: BuildInPlacements = {
@@ -99,10 +99,7 @@ const Demo = () => {
   const [placement, placementProps] = useControl('value', 'right');
   const [stretch, stretchProps] = useControl('value', '');
   const [motion, motionProps] = useControl('checked', true);
-  const [destroyPopupOnHide, destroyPopupOnHideProps] = useControl(
-    'checked',
-    false,
-  );
+  const [destroyPopupOnHide, destroyPopupOnHideProps] = useControl('checked', false);
   const [mask, maskProps] = useControl('checked', false);
   const [maskClosable, maskClosableProps] = useControl('checked', true);
   const [forceRender, forceRenderProps] = useControl('checked', false);

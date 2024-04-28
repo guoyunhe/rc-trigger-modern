@@ -1,11 +1,11 @@
 import { act, cleanup, fireEvent, render } from '@testing-library/react';
-import { spyElementPrototypes } from 'rc-util/lib/test/domHook';
+import { spyElementPrototypes } from 'rc-util-modern/dist/test/domHook';
 import React from 'react';
 import type { TriggerProps, TriggerRef } from '../src';
 import Trigger from '../src';
 import { awaitFakeTimer } from './util';
 
-import { _rs } from 'rc-resize-observer';
+import { _rs } from 'rc-resize-observer-modern';
 
 export const triggerResize = (target: Element) => {
   act(() => {

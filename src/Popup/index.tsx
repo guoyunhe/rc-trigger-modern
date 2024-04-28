@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import type { CSSMotionProps } from 'rc-motion';
-import CSSMotion from 'rc-motion';
-import ResizeObserver from 'rc-resize-observer';
-import useLayoutEffect from 'rc-util/lib/hooks/useLayoutEffect';
-import { composeRef } from 'rc-util/lib/ref';
+import type { CSSMotionProps } from 'rc-motion-modern';
+import CSSMotion from 'rc-motion-modern';
+import ResizeObserver from 'rc-resize-observer-modern';
+import useLayoutEffect from 'rc-util-modern/dist/hooks/useLayoutEffect';
+import { composeRef } from 'rc-util-modern/dist/ref';
 import * as React from 'react';
 import type { TriggerProps } from '../';
 import type { AlignType, ArrowPos, ArrowTypeOuter } from '../interface';
@@ -127,9 +127,7 @@ const Popup = React.forwardRef<HTMLDivElement, PopupProps>((props, ref) => {
   // ======================= Container ========================
   const getPopupContainerNeedParams = getPopupContainer?.length > 0;
 
-  const [show, setShow] = React.useState(
-    !getPopupContainer || !getPopupContainerNeedParams,
-  );
+  const [show, setShow] = React.useState(!getPopupContainer || !getPopupContainerNeedParams);
 
   // Delay to show since `getPopupContainer` need target element
   useLayoutEffect(() => {
@@ -156,8 +154,7 @@ const Popup = React.forwardRef<HTMLDivElement, PopupProps>((props, ref) => {
   // Set align style
   if (ready || !open) {
     const { points } = align;
-    const dynamicInset =
-      align.dynamicInset || (align as any)._experimental?.dynamicInset;
+    const dynamicInset = align.dynamicInset || (align as any)._experimental?.dynamicInset;
     const alignRight = dynamicInset && points[0][1] === 'r';
     const alignBottom = dynamicInset && points[0][0] === 'b';
 
@@ -203,13 +200,7 @@ const Popup = React.forwardRef<HTMLDivElement, PopupProps>((props, ref) => {
       getContainer={getPopupContainer && (() => getPopupContainer(target))}
       autoDestroy={autoDestroy}
     >
-      <Mask
-        prefixCls={prefixCls}
-        open={open}
-        zIndex={zIndex}
-        mask={mask}
-        motion={maskMotion}
-      />
+      <Mask prefixCls={prefixCls} open={open} zIndex={zIndex} mask={mask} motion={maskMotion} />
       <ResizeObserver onResize={onAlign} disabled={!open}>
         {(resizeObserverRef) => {
           return (
@@ -229,10 +220,7 @@ const Popup = React.forwardRef<HTMLDivElement, PopupProps>((props, ref) => {
                 onVisibleChanged(nextVisible);
               }}
             >
-              {(
-                { className: motionClassName, style: motionStyle },
-                motionRef,
-              ) => {
+              {({ className: motionClassName, style: motionStyle }, motionRef) => {
                 const cls = classNames(prefixCls, motionClassName, className);
 
                 return (
@@ -264,9 +252,7 @@ const Popup = React.forwardRef<HTMLDivElement, PopupProps>((props, ref) => {
                         align={align}
                       />
                     )}
-                    <PopupContent cache={!open && !fresh}>
-                      {childNode}
-                    </PopupContent>
+                    <PopupContent cache={!open && !fresh}>{childNode}</PopupContent>
                   </div>
                 );
               }}

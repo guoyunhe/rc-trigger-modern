@@ -1,17 +1,23 @@
 {
   "compilerOptions": {
-    "target": "esnext",
+    "target": "es2015",
     "moduleResolution": "node",
-    "baseUrl": "./",
-    "jsx": "react",
-    "declaration": true,
+    "jsx": "react-jsx",
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@@/*": [".dumi/tmp/*"],
-      "rc-trigger": ["src/index.tsx"]
-    }
-  }
+      "@/*": ["./src/*"],
+      "@@/*": ["./.dumi/tmp/*"],
+      "rc-trigger": ["./src/index.tsx"]
+    },
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "allowJs": true,
+    "checkJs": false,
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "types": ["node", "rive/globals"]
+  },
+  "exclude": [".rive", "build", "coverage", "dist", "node_modules"]
 }

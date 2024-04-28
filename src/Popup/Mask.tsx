@@ -1,7 +1,6 @@
 import classNames from 'classnames';
-import type { CSSMotionProps } from 'rc-motion';
-import CSSMotion from 'rc-motion';
-import * as React from 'react';
+import type { CSSMotionProps } from 'rc-motion-modern';
+import CSSMotion from 'rc-motion-modern';
 
 export interface MaskProps {
   prefixCls: string;
@@ -30,10 +29,7 @@ export default function Mask(props: MaskProps) {
   return (
     <CSSMotion {...motion} motionAppear visible={open} removeOnLeave>
       {({ className }) => (
-        <div
-          style={{ zIndex }}
-          className={classNames(`${prefixCls}-mask`, className)}
-        />
+        <div style={{ zIndex }} className={classNames(`${prefixCls}-mask`, className)} />
       )}
     </CSSMotion>
   );

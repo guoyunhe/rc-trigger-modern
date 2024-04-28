@@ -1,7 +1,6 @@
 import { act, cleanup, render } from '@testing-library/react';
-import { _rs } from 'rc-resize-observer';
-import { spyElementPrototypes } from 'rc-util/lib/test/domHook';
-import * as React from 'react';
+import { _rs } from 'rc-resize-observer-modern';
+import { spyElementPrototypes } from 'rc-util-modern/dist/test/domHook';
 import type { AlignType, TriggerProps } from '../src';
 import Trigger from '../src';
 import { getVisibleArea } from '../src/util';
